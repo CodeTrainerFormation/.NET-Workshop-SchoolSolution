@@ -57,7 +57,7 @@ namespace Dal
                     LastName = "Mosby",
                     Average = 12.0,
                     IsClassDelegate = true,
-                    //Classroom = classrooms[0],
+                    Classroom = classrooms[0],
                 },
                 new Student()
                 {
@@ -65,7 +65,7 @@ namespace Dal
                     LastName = "Dorian",
                     Average = 19.0,
                     IsClassDelegate = false,
-                    //Classroom = classrooms[0],
+                    Classroom = classrooms[0],
                 },
                 new Student()
                 {
@@ -73,7 +73,7 @@ namespace Dal
                     LastName = "Eriksen",
                     Average = 9.0,
                     IsClassDelegate = false,
-                    //Classroom = classrooms[0],
+                    Classroom = classrooms[0],
                 },
                 new Student()
                 {
@@ -81,7 +81,7 @@ namespace Dal
                     LastName = "Scherbatsky",
                     Average = 13.0,
                     IsClassDelegate = false,
-                    //Classroom = classrooms[1],
+                    Classroom = classrooms[1],
                 },
                 new Student()
                 {
@@ -89,7 +89,7 @@ namespace Dal
                     LastName = "Aldrin",
                     Average = 14.0,
                     IsClassDelegate = true,
-                    //Classroom = classrooms[1],
+                    Classroom = classrooms[1],
                 },
             };
 
@@ -105,7 +105,7 @@ namespace Dal
                     LastName = "Stinson",
                     Discipline = "Economie",
                     HiringDate = new DateTime(2010, 10, 10),
-                    //Classroom = classrooms[0],
+                    Classroom = classrooms[0],
                 },
                 new Teacher()
                 {
@@ -113,7 +113,7 @@ namespace Dal
                     LastName = "Cox",
                     Discipline = "Medecine",
                     HiringDate = new DateTime(2015, 07, 22),
-                    //Classroom = classrooms[1],
+                    Classroom = classrooms[1],
                 },
             };
             context.Teachers.AddRange(teachers);

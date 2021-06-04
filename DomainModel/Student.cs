@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace DomainModel
 {
-    //[Table("Students")]
+    [Table("Students")]
     public class Student : Person
     {
         public double Average { get; set; }
         public bool IsClassDelegate { get; set; }
+
+        public virtual Classroom Classroom { get; set; }
+
     }
 }

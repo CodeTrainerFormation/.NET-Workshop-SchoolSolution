@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace DomainModel
 {
-    //[Table("Teacher")]
+    [Table("Teachers")]
     public class Teacher : Person
     {
         [Required]
         public string Discipline { get; set; }
         public DateTime HiringDate { get; set; }
+
+
+        public int ClassroomId { get; set; }
+        public virtual Classroom Classroom { get; set; }
     }
 
 }
