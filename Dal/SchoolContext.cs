@@ -11,10 +11,20 @@ namespace Dal
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
 
+        public SchoolContext()
+            : base()
+        {
+        }
+
+        public SchoolContext(DbContextOptions options)
+            : base(options)
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseInMemoryDatabase("SchoolDatabaseMemory");
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=SchoolDatabase;Integrated Security=true");
+            //optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=SchoolDatabase;Integrated Security=true");
 
             base.OnConfiguring(optionsBuilder);
         }
