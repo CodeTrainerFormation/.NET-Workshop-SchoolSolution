@@ -1,5 +1,6 @@
 ﻿using Dal;
 using DomainModel;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,18 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            var context = new SchoolContext();
-
-            context.Initialize(true);
-
-            foreach (var item in context.People)
+            using (var context = new SchoolContext())
             {
-                Console.WriteLine($"{item.FirstName} {item.LastName}");
+                context.Initialize(false);
+
+                foreach (var item in context.People.AsNoTracking())
+                {
+                    Console.WriteLine($"{item.FirstName} {item.LastName}");
+                }
+
             }
         }
+  
     }
 
 }
