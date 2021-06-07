@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebSchool.Models;
+using WebSchool.Repositories;
 
 namespace WebSchool.Controllers
 {
@@ -16,10 +17,11 @@ namespace WebSchool.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, SchoolContext ctx)
+        public HomeController(ILogger<HomeController> logger, IStudentRepository repo)
         {
             _logger = logger;
-            var test = ctx.People.ToList();
+
+            var test = repo.GetStudents();
         }
 
         public IActionResult Index()
