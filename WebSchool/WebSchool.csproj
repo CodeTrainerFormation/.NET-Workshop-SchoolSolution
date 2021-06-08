@@ -9,4 +9,8 @@
     <ProjectReference Include="..\DomainModel\DomainModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Classroom\" />
+  </ItemGroup>
+
 </Project>

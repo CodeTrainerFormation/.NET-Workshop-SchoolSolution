@@ -16,12 +16,12 @@ namespace WebSchool.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private IStudentRepository repository;
 
-        public HomeController(ILogger<HomeController> logger, IStudentRepository repo)
+        public HomeController(ILogger<HomeController> logger, IStudentRepository repository)
         {
-            _logger = logger;
-
-            var test = repo.GetStudents();
+            this._logger = logger;
+            this.repository = repository;
         }
 
         public IActionResult Index()
