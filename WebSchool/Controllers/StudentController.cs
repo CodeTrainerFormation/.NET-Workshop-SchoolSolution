@@ -1,32 +1,51 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebSchool.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Dal;
+using DomainModel;
 
 namespace WebSchool.Controllers
 {
     public class StudentController : Controller
     {
-        private IStudentRepository repository;
+        private readonly SchoolContext _context;
 
-        public StudentController(IStudentRepository repository)
+        public StudentController(SchoolContext context)
         {
-            this.repository = repository;
+            _context = context;
+        }
+
+        public IActionResult Photo([FromRoute] int studentid)
+        {
+            return File("", "");
         }
 
         // GET: Student
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(this.repository.GetStudents());
+            return View(await _context.Students.ToListAsync());
         }
 
         // GET: Student/Details/5
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var student = await _context.Students
+                .FirstOrDefaultAsync(m => m.PersonId == id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return View(student);
         }
 
         // GET: Student/Create
@@ -35,61 +54,105 @@ namespace WebSchool.Controllers
             return View();
         }
 
-        // POST: StudentController/Create
+        // POST: Student/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("Average,IsClassDelegate,PersonId,FirstName,LastName,Age")] Student student)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _context.Add(student);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(student);
         }
 
-        // GET: StudentController/Edit/5
-        public IActionResult Edit(int id)
+        // GET: Student/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return View(student);
         }
 
-        // POST: StudentController/Edit/5
+        // POST: Student/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("Average,IsClassDelegate,PersonId,FirstName,LastName,Age")] Student student)
         {
-            try
+            if (id != student.PersonId)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(student);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!StudentExists(student.PersonId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(student);
         }
 
-        // GET: StudentController/Delete/5
-        public IActionResult Delete(int id)
+        // GET: Student/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var student = await _context.Students
+                .FirstOrDefaultAsync(m => m.PersonId == id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return View(student);
         }
 
-        // POST: StudentController/Delete/5
-        [HttpPost]
+        // POST: Student/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var student = await _context.Students.FindAsync(id);
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool StudentExists(int id)
+        {
+            return _context.Students.Any(e => e.PersonId == id);
         }
     }
 }

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dal", "Dal\Dal.csproj", "{5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSchool", "WebSchool\WebSchool.csproj", "{DAAEECCF-1402-47A9-94E4-72E46954B4B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{6693BFCF-F467-4F12-87C8-64CE28BC956F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DAAEECCF-1402-47A9-94E4-72E46954B4B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAAEECCF-1402-47A9-94E4-72E46954B4B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAAEECCF-1402-47A9-94E4-72E46954B4B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6693BFCF-F467-4F12-87C8-64CE28BC956F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6693BFCF-F467-4F12-87C8-64CE28BC956F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6693BFCF-F467-4F12-87C8-64CE28BC956F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6693BFCF-F467-4F12-87C8-64CE28BC956F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
